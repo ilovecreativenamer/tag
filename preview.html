@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG! Title Screen</title>
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:Arial Black, sans-serif;
+    background:#102040;
+}
+
+/* SKY */
+
+.sky{
+    position:fixed;
+    inset:0;
+
+    background:linear-gradient(
+        #102040,
+        #243b6b,
+        #35508c
+    );
+}
+
+/* STARS */
+
+.star{
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:white;
+
+    border-radius:50%;
+
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:0.3;
+        transform:scale(1);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.6);
+    }
+
+}
+
+/* MOON */
+
+.moon{
+    position:absolute;
+
+    top:60px;
+    right:90px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:#f8f4d2;
+
+    box-shadow:
+        0 0 40px rgba(255,255,200,0.7);
+}
+
+/* MOUNTAINS */
+
+.mountains{
+    position:absolute;
+
+    bottom:120px;
+
+    width:100%;
+    height:320px;
+
+    overflow:hidden;
+}
+
+.mountain{
+    position:absolute;
+
+    bottom:0;
+
+    clip-path:polygon(
+        50% 0%,
+        0% 100%,
+        100% 100%
+    );
+}
+
+.mountain1{
+    width:520px;
+    height:280px;
+
+    left:-70px;
+
+    background:#24395f;
+}
+
+.mountain2{
+    width:680px;
+    height:360px;
+
+    left:25%;
+
+    background:#1d2f52;
+}
+
+.mountain3{
+    width:450px;
+    height:240px;
+
+    right:-40px;
+
+    background:#2f4974;
+}
+
+/* CLOUDS */
+
+.cloud{
+    position:absolute;
+
+    width:180px;
+    height:60px;
+
+    background:#72809d;
+
+    border-radius:50px;
+
+    opacity:0.8;
+
+    animation:cloudMove 35s ease-in-out infinite;
+}
+
+.cloud::before,
+.cloud::after{
+    content:"";
+
+    position:absolute;
+
+    background:#72809d;
+
+    border-radius:50%;
+}
+
+.cloud::before{
+    width:80px;
+    height:80px;
+
+    top:-35px;
+    left:25px;
+}
+
+.cloud::after{
+    width:95px;
+    height:95px;
+
+    top:-45px;
+    right:20px;
+}
+
+.cloud1{
+    top:70px;
+    left:-200px;
+}
+
+.cloud2{
+    top:190px;
+    left:-500px;
+
+    animation-delay:8s;
+}
+
+.cloud3{
+    top:320px;
+    left:-800px;
+
+    animation-delay:15s;
+}
+
+/* CLOUD MOVEMENT */
+
+@keyframes cloudMove{
+
+    0%{
+        transform:translateX(-250px);
+    }
+
+    50%{
+        transform:translateX(55vw);
+    }
+
+    100%{
+        transform:translateX(120vw);
+    }
+
+}
+
+/* TITLE */
+
+.title{
+    position:absolute;
+
+    top:16%;
+    width:100%;
+
+    text-align:center;
+
+    font-size:145px;
+
+    color:#ffe44d;
+
+    font-family:Arial Black, sans-serif;
+
+    -webkit-text-stroke:8px #222;
+
+    text-shadow:
+        10px 10px 0 #ff9200,
+        18px 18px 0 rgba(0,0,0,0.3);
+
+    animation:titleBounce 1.4s ease-in-out infinite;
+}
+
+@keyframes titleBounce{
+
+    0%,100%{
+        transform:rotate(-4deg) scale(1);
+    }
+
+    50%{
+        transform:rotate(4deg) scale(1.08);
+    }
+
+}
+
+/* MENU */
+
+.menu{
+    position:absolute;
+
+    width:100%;
+
+    top:48%;
+
+    text-align:center;
+
+    z-index:5;
+}
+
+/* PLAY BUTTON */
+
+button{
+
+    width:300px;
+
+    padding:22px;
+
+    font-size:38px;
+
+    font-family:inherit;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#ffef5c;
+
+    color:#222;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 0 #d58a00,
+        0 0 0 6px #222;
+
+    transition:0.15s;
+}
+
+button:hover{
+
+    transform:scale(1.08) rotate(-3deg);
+
+    background:#ffbf47;
+}
+
+button:active{
+    transform:scale(0.95);
+}
+
+/* PRESS ENTER */
+
+.press{
+
+    margin-top:28px;
+
+    font-size:30px;
+
+    color:white;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:0.2;
+    }
+
+}
+
+/* PLAYERS */
+
+.player{
+    position:absolute;
+
+    bottom:120px;
+
+    width:55px;
+    height:80px;
+
+    border-radius:14px;
+
+    border:5px solid #222;
+
+    animation:jump 1s infinite;
+}
+
+.player::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#ffd3a8;
+
+    border:5px solid #222;
+
+    top:-45px;
+
+    left:0;
+    right:0;
+
+    margin:auto;
+}
+
+.player1{
+    left:20%;
+
+    background:#ff4d4d;
+}
+
+.player2{
+    left:72%;
+
+    background:#4d7cff;
+
+    animation-delay:0.4s;
+}
+
+@keyframes jump{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+/* GROUND */
+
+.ground{
+    position:fixed;
+
+    bottom:0;
+
+    width:100%;
+
+    height:120px;
+
+    background:#49b33b;
+
+    border-top:10px solid #2e7f24;
+}
+
+/* GRASS */
+
+.grass{
+    position:absolute;
+
+    bottom:110px;
+
+    width:22px;
+    height:36px;
+
+    background:#2f8a25;
+
+    clip-path:polygon(
+        50% 0%,
+        0% 100%,
+        100% 100%
+    );
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+
+    <!-- MOON -->
+    <div class="moon"></div>
+
+    <!-- STARS -->
+    <div class="star" style="top:40px; left:10%;"></div>
+    <div class="star" style="top:80px; left:25%;"></div>
+    <div class="star" style="top:140px; left:70%;"></div>
+    <div class="star" style="top:220px; left:50%;"></div>
+    <div class="star" style="top:100px; left:85%;"></div>
+    <div class="star" style="top:250px; left:30%;"></div>
+    <div class="star" style="top:310px; left:60%;"></div>
+    <div class="star" style="top:170px; left:15%;"></div>
+    <div class="star" style="top:120px; left:40%;"></div>
+    <div class="star" style="top:60px; left:55%;"></div>
+
+    <!-- MOUNTAINS -->
+    <div class="mountains">
+
+        <div class="mountain mountain1"></div>
+        <div class="mountain mountain2"></div>
+        <div class="mountain mountain3"></div>
+
+    </div>
+
+    <!-- CLOUDS -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+</div>
+
+<!-- TITLE -->
+<div class="title">
+    TAG!
+</div>
+
+<!-- MENU -->
+<div class="menu">
+
+    <button onclick="startGame()">
+        PLAY
+    </button>
+
+    <div class="press">
+        PRESS ENTER TO START
+    </div>
+
+</div>
+
+<!-- PLAYERS -->
+<div class="player player1"></div>
+<div class="player player2"></div>
+
+<!-- GRASS -->
+<div class="grass" style="left:5%;"></div>
+<div class="grass" style="left:12%;"></div>
+<div class="grass" style="left:20%;"></div>
+<div class="grass" style="left:30%;"></div>
+<div class="grass" style="left:40%;"></div>
+<div class="grass" style="left:52%;"></div>
+<div class="grass" style="left:64%;"></div>
+<div class="grass" style="left:76%;"></div>
+<div class="grass" style="left:88%;"></div>
+
+<!-- GROUND -->
+<div class="ground"></div>
+
+<script>
+
+function startGame(){
+
+    alert("Starting TAG!");
+
+}
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        startGame();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
